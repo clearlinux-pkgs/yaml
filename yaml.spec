@@ -4,7 +4,7 @@
 #
 Name     : yaml
 Version  : 0.1.6
-Release  : 6
+Release  : 7
 URL      : http://pyyaml.org/download/libyaml/yaml-0.1.6.tar.gz
 Source0  : http://pyyaml.org/download/libyaml/yaml-0.1.6.tar.gz
 Summary  : Library to parse and emit YAML
@@ -24,6 +24,7 @@ $ make
 Summary: dev components for the yaml package.
 Group: Development
 Requires: yaml-lib
+Provides: yaml-devel
 
 %description dev
 dev components for the yaml package.
@@ -42,13 +43,20 @@ lib components for the yaml package.
 %patch1 -p1
 
 %build
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -fno-semantic-interposition -falign-functions=32 -O3 -flto "
+export FCFLAGS="$CFLAGS -fno-semantic-interposition -falign-functions=32 -O3 -flto "
+export FFLAGS="$CFLAGS -fno-semantic-interposition -falign-functions=32 -O3 -flto "
+export CXXFLAGS="$CXXFLAGS -fno-semantic-interposition -falign-functions=32 -O3 -flto "
 %configure --disable-static
 make V=1  %{?_smp_mflags}
 
 %check
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
-export no_proxy=intel.com,localhost
+export no_proxy=localhost
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
