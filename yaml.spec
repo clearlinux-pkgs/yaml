@@ -4,7 +4,7 @@
 #
 Name     : yaml
 Version  : 0.1.7
-Release  : 12
+Release  : 13
 URL      : http://pyyaml.org/download/libyaml/yaml-0.1.7.tar.gz
 Source0  : http://pyyaml.org/download/libyaml/yaml-0.1.7.tar.gz
 Summary  : Library to parse and emit YAML
