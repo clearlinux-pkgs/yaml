@@ -4,7 +4,7 @@
 #
 Name     : yaml
 Version  : 0.1.7
-Release  : 13
+Release  : 14
 URL      : http://pyyaml.org/download/libyaml/yaml-0.1.7.tar.gz
 Source0  : http://pyyaml.org/download/libyaml/yaml-0.1.7.tar.gz
 Summary  : Library to parse and emit YAML
@@ -41,25 +41,27 @@ lib components for the yaml package.
 %setup -q -n yaml-0.1.7
 
 %build
+export http_proxy=http://127.0.0.1:9/
+export https_proxy=http://127.0.0.1:9/
+export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export AR=gcc-ar
-export RANLIB=gcc-ranlib
-export NM=gcc-nm
-export CFLAGS="$CFLAGS -fno-semantic-interposition -falign-functions=32 -O3 "
-export FCFLAGS="$CFLAGS -fno-semantic-interposition -falign-functions=32 -O3 "
-export FFLAGS="$CFLAGS -fno-semantic-interposition -falign-functions=32 -O3 "
-export CXXFLAGS="$CXXFLAGS -fno-semantic-interposition -falign-functions=32 -O3 "
+export SOURCE_DATE_EPOCH=1517696852
+export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
+export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
+export FFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
+export CXXFLAGS="$CXXFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
 %configure --disable-static
-make V=1  %{?_smp_mflags}
+make  %{?_smp_mflags}
 
 %check
 export LANG=C
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
-export no_proxy=localhost
+export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
+export SOURCE_DATE_EPOCH=1517696852
 rm -rf %{buildroot}
 %make_install
 
@@ -69,9 +71,10 @@ rm -rf %{buildroot}
 %files dev
 %defattr(-,root,root,-)
 /usr/include/*.h
-/usr/lib64/*.so
-/usr/lib64/pkgconfig/*.pc
+/usr/lib64/libyaml.so
+/usr/lib64/pkgconfig/yaml-0.1.pc
 
 %files lib
 %defattr(-,root,root,-)
-/usr/lib64/*.so.*
+/usr/lib64/libyaml-0.so.2
+/usr/lib64/libyaml-0.so.2.0.5
