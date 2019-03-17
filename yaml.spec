@@ -4,14 +4,14 @@
 #
 Name     : yaml
 Version  : 0.2.1
-Release  : 16
+Release  : 17
 URL      : http://pyyaml.org/download/libyaml/yaml-0.2.1.tar.gz
 Source0  : http://pyyaml.org/download/libyaml/yaml-0.2.1.tar.gz
 Summary  : Library to parse and emit YAML
 Group    : Development/Tools
 License  : MIT
-Requires: yaml-lib
-Requires: yaml-license
+Requires: yaml-lib = %{version}-%{release}
+Requires: yaml-license = %{version}-%{release}
 
 %description
 LibYAML - A C library for parsing and emitting YAML.
@@ -23,8 +23,9 @@ $ make
 %package dev
 Summary: dev components for the yaml package.
 Group: Development
-Requires: yaml-lib
-Provides: yaml-devel
+Requires: yaml-lib = %{version}-%{release}
+Provides: yaml-devel = %{version}-%{release}
+Requires: yaml = %{version}-%{release}
 
 %description dev
 dev components for the yaml package.
@@ -33,7 +34,7 @@ dev components for the yaml package.
 %package lib
 Summary: lib components for the yaml package.
 Group: Libraries
-Requires: yaml-license
+Requires: yaml-license = %{version}-%{release}
 
 %description lib
 lib components for the yaml package.
@@ -55,7 +56,8 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1530990380
+export SOURCE_DATE_EPOCH=1552835306
+export LDFLAGS="${LDFLAGS} -fno-lto"
 export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
 export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
 export FFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
@@ -71,10 +73,10 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1530990380
+export SOURCE_DATE_EPOCH=1552835306
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/yaml
-cp LICENSE %{buildroot}/usr/share/doc/yaml/LICENSE
+mkdir -p %{buildroot}/usr/share/package-licenses/yaml
+cp LICENSE %{buildroot}/usr/share/package-licenses/yaml/LICENSE
 %make_install
 
 %files
@@ -92,5 +94,5 @@ cp LICENSE %{buildroot}/usr/share/doc/yaml/LICENSE
 /usr/lib64/libyaml-0.so.2.0.5
 
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/yaml/LICENSE
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/yaml/LICENSE
