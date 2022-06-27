@@ -4,7 +4,7 @@
 #
 Name     : yaml
 Version  : 0.2.5
-Release  : 22
+Release  : 23
 URL      : https://pyyaml.org/download/libyaml/yaml-0.2.5.tar.gz
 Source0  : https://pyyaml.org/download/libyaml/yaml-0.2.5.tar.gz
 Summary  : Library to parse and emit YAML
@@ -57,7 +57,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1656341878
+export SOURCE_DATE_EPOCH=1656342346
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -Ofast -falign-functions=32 -fno-lto -fno-semantic-interposition -mprefer-vector-width=256 "
 export FCFLAGS="$FFLAGS -Ofast -falign-functions=32 -fno-lto -fno-semantic-interposition -mprefer-vector-width=256 "
@@ -86,7 +86,7 @@ cd ../buildavx2;
 make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1656341878
+export SOURCE_DATE_EPOCH=1656342346
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/yaml
 cp %{_builddir}/yaml-0.2.5/License %{buildroot}/usr/share/package-licenses/yaml/e99e74d048726c39136dc992f1fb5998972e3b4e
