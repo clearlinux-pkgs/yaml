@@ -5,7 +5,7 @@
 #
 Name     : yaml
 Version  : 0.2.5
-Release  : 29
+Release  : 30
 URL      : https://pyyaml.org/download/libyaml/yaml-0.2.5.tar.gz
 Source0  : https://pyyaml.org/download/libyaml/yaml-0.2.5.tar.gz
 Summary  : Library to parse and emit YAML
@@ -62,7 +62,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1683245572
+export SOURCE_DATE_EPOCH=1685477879
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 export FCFLAGS="$FFLAGS -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
@@ -91,7 +91,7 @@ cd ../buildavx2;
 make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1683245572
+export SOURCE_DATE_EPOCH=1685477879
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/yaml
 cp %{_builddir}/yaml-%{version}/License %{buildroot}/usr/share/package-licenses/yaml/e99e74d048726c39136dc992f1fb5998972e3b4e || :
@@ -106,14 +106,12 @@ popd
 
 %files dev
 %defattr(-,root,root,-)
-/V3/usr/lib64/libyaml.so
 /usr/include/yaml.h
 /usr/lib64/libyaml.so
 /usr/lib64/pkgconfig/yaml-0.1.pc
 
 %files lib
 %defattr(-,root,root,-)
-/V3/usr/lib64/libyaml-0.so.2
 /V3/usr/lib64/libyaml-0.so.2.0.9
 /usr/lib64/libyaml-0.so.2
 /usr/lib64/libyaml-0.so.2.0.9
